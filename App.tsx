@@ -1,4 +1,4 @@
-import {FlatList, ScrollView, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import HomeScreen from './src/screens/HomeScreen';
 
 const App = () => {

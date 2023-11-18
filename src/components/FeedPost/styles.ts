@@ -41,14 +41,7 @@ const styles = StyleSheet.create({
       lineHeight: 18,
     },
   
-    comment: {
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    commentText: {
-      color: colors.black,
-      flex: 1,
-    },
+   
   });
   
   export default styles;

@@ -6,19 +6,25 @@ import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import styles from './styles';
+import Comment from '../Comment';
+import {IPost} from '../../types/models';
 
-const FeedPost = () => {
+interface IFeedPost {
+  post: IPost;
+}
+
+const FeedPost = ({post}: IFeedPost) => {
   return (
     <View style={styles.post}>
       {/* header */}
       <View style={styles.header}>
         <Image
           source={{
-            uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/1.jpg',
+            uri: post.user.image,
           }}
           style={styles.userAvatar}
         />
-        <Text style={styles.userName}>Nithi</Text>
+        <Text style={styles.userName}>{post.user.username}</Text>
         <Entypo
           name="dots-three-horizontal"
           size={16}
@@ -28,7 +34,7 @@ const FeedPost = () => {
       {/* content */}
       <Image
         source={{
-          uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg',
+          uri: post.image,
         }}
         style={styles.image}
       />
@@ -64,30 +70,20 @@ const FeedPost = () => {
 
         <Text>
           Liked by <Text style={styles.bold}>user</Text> and{' '}
-          <Text style={styles.bold}>66</Text> others
+          <Text style={styles.bold}>{post.nofLikes}</Text> others
         </Text>
 
         {/* Post decsription */}
         <Text style={styles.text}>
           <Text style={styles.bold}>User </Text>
-          Description Description Description Description Description
-          Description Description Description
+          {post.description}
         </Text>
         {/* comments */}
-        <Text>View all 16 comments</Text>
-        <View style={styles.comment}>
-          <Text style={styles.commentText}>
-            <Text style={styles.bold}>User </Text>
-            Comment Comment Comment
-          </Text>
-          <AntDesign
-            name={'hearto'}
-            size={16}
-            style={styles.icon}
-            color={colors.black}
-          />
-        </View>
-        <Text>19 December 2022</Text>
+        <Text>View all {post.nofComments} comments</Text>
+        {post.comments.map(comment => (
+          <Comment comment={comment} key={comment.id} />
+        ))}
+        <Text>{post.createdAt}</Text>
       </View>
     </View>
   );
